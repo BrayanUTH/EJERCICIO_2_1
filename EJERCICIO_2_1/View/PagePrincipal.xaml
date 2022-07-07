@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:EJERCICIO_2_1.Converters"
+             x:Class="EJERCICIO_2_1.View.PagePrincipal"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <converters:ImageSvgToImageSource x:Key="SvgToImageValid" />
+    </ContentPage.Resources>
+
+    <StackLayout Padding="10">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+
+            <Picker x:Name="PickerRegion"
+                Title="Elige una region"
+                FontSize="15"
+                TitleColor="Black"
+                SelectedIndexChanged="PickerRegion_SelectedIndexChanged"
+                Grid.Column="0"
+                HorizontalOptions="Fill">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Africa</x:String>
+                        <x:String>Asia</x:String>
+                        <x:String>America</x:String>
+                        <x:String>Oceania</x:String>
+                        <x:String>Europe</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Label FontSize="15" Grid.Column="1" x:Name="lblResult" Text="Resultado: "  VerticalOptions="Center" HorizontalOptions="End"/>
+            <Label FontSize="15" Grid.Column="2" x:Name="lblCount" Text="{Binding Count}"  VerticalOptions="Center" HorizontalOptions="Start" TextColor="DarkBlue"/>
+        </Grid>
+
+        <ListView x:Name="ListCountries" 
+                  ItemTapped="ListCountries_ItemTapped"
+                  HasUnevenRows="True">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame BackgroundColor="#DEDEDE"
+                               CornerRadius="15"
+                               Margin="0,0,0,10">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding flags.svg, Converter={StaticResource SvgToImageValid}}" 
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+
+                                <Label Text="{Binding NameCountry.common}"
+                                       VerticalOptions="Center" />
+
+                                <Label HorizontalOptions="EndAndExpand"
+                                       VerticalOptions="Center"
+                                       Text="{Binding CodeCountry}"/>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+</ContentPage>

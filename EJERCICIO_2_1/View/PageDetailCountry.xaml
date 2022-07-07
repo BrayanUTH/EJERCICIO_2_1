@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:converters ="clr-namespace:EJERCICIO_2_1.Converters"
+             x:Class="EJERCICIO_2_1.View.PageDetailCountry"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <converters:ImageSvgToImageSource x:Key="SvgToImageValid" />
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <maps:Map x:Name="mapa"/>
+        <StackLayout Padding="10,7,10,20">
+            <StackLayout>
+                <Label Text="Informacion Detallada" 
+                       FontSize="Title" 
+                       HorizontalTextAlignment="Center" 
+                       FontAttributes="Bold"/>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Nombre: " FontAttributes="Bold" FontSize="17"/>
+                    <Label Text="{Binding NameCountry.common}" x:Name="lblName" FontSize="16"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Capital: " FontAttributes="Bold" FontSize="17"/>
+                    <Label Text="{Binding capital}" x:Name="lblCapital" FontSize="16"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Pupularidad: " FontAttributes="Bold" FontSize="17"/>
+                    <Label Text="{Binding population}" x:Name="lblPopulation" FontSize="16"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Bandera: " FontAttributes="Bold" FontSize="17"/>
+                    <Image  Source="{Binding flags.svg, Converter={StaticResource SvgToImageValid}}" 
+                            HeightRequest="30"
+                            HorizontalOptions="Start"
+                            Aspect="AspectFit" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+
+    </StackLayout>
+</ContentPage>
